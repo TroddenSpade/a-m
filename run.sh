@@ -1,7 +1,11 @@
 #!/bin/bash
 
-nasm -f elf $1 -o ini/file.o
+nasm -f elf -d ELF_TYPE ./ini/asm_io.asm -o ./obj/asm_io.o
+gcc -m32 -c ./ini/driver.c -o ./obj/driver.o
 
-gcc -m32 ini/driver.o ini/file.o ini/asm_io.o -o executable
+nasm -f elf ./asm/$1 -o ./obj/file.o
 
-./executable
+
+gcc -m32 ./obj/driver.o ./obj/file.o ./obj/asm_io.o
+
+./a.out
